@@ -17,7 +17,7 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   globals: {},
   /* 指定如何解析语法。可以为空，但若不为空，只能配该值，原因见下文。*/
@@ -29,19 +29,26 @@ module.exports = {
     sourceType: 'module', // Allows for the use of imports
     ecmaFeatures: {
       // tsx: true, // Allows for the parsing of JSX
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
     'prettier',
-    'plugin:prettier/recommended'
   ],
   plugins: ['vue'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 1,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 1
-  }
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 1,
+    'vue/one-component-per-file': 0,
+    'prettier/prettier': [
+      'error',
+      {
+        trailingComma: 'all',
+      },
+    ],
+  },
 };
