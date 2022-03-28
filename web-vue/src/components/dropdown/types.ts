@@ -1,4 +1,4 @@
-import { VueNode } from '@/types/vue-type';
+import type { VueNode } from '@/types/vue-type';
 
 export interface DropdownProps {
   trigger?: 'hover' | 'click';

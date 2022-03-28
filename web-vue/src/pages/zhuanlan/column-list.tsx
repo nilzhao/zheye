@@ -1,5 +1,6 @@
-import { defineComponent, PropType } from 'vue';
-import { ColumnItem } from '../types/column';
+import type { PropType } from 'vue';
+import { defineComponent } from 'vue';
+import type { ColumnItem } from '../../types/column';
 
 const ColumnList = defineComponent({
   props: {
@@ -12,7 +13,7 @@ const ColumnList = defineComponent({
     return () => {
       return (
         <div class="row gy-2">
-          {props.list.map((item) => {
+          {props.list.map(item => {
             return (
               <div class="col-sm-6 col-lg-4" key={item.id}>
                 <div class="card m-3">

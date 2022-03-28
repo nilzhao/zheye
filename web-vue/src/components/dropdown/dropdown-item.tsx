@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { classNames } from '@/lib/utils';
 import { defineComponent } from 'vue';
 
 const DropdownItem = defineComponent({

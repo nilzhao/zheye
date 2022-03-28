@@ -1,6 +1,7 @@
-import { defineComponent, ref, Transition, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, ref, Transition } from 'vue';
 import './index.scss';
-import { DropdownProps } from './types';
+import type { DropdownProps } from './types';
 
 const Dropdown = defineComponent({
   props: {

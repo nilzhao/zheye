@@ -1,4 +1,4 @@
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 
 import type { VueTypeValidableDef, VueTypeDef } from 'vue-types';
 
@@ -15,7 +15,7 @@ const initDefaultProps = <T>(
   },
 ): T => {
   const propTypes: T = { ...types };
-  Object.keys(defaultProps).forEach((key) => {
+  Object.keys(defaultProps).forEach(key => {
     const k = key as keyof T;
     const prop = propTypes[k] as unknown as VueTypeValidableDef;
     const defaultValue = defaultProps[k];

@@ -1,5 +1,6 @@
-import { CurrentUser } from '@/types/user';
-import { defineComponent, PropType } from 'vue';
+import type { CurrentUser } from '@/types/user';
+import type { PropType } from 'vue';
+import { defineComponent } from 'vue';
 import Dropdown from '../dropdown/dropdown';
 import DropdownItem from '../dropdown/dropdown-item';
 import styles from './index.module.scss';

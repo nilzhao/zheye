@@ -1,54 +1,81 @@
-/**
- * 所需插件
- * prettier // 规则见 https://prettier.io/docs/en/options.html
- * eslint // 规则见 https://cn.eslint.org/docs/rules/
- * eslint-plugin-vue 规则见 https://github.com/vuejs/eslint-plugin-vue
- * eslint-plugin-prettier // 将prettier作为ESLint规范来使用
- * eslint-config-prettier
- * @typescript-eslint/eslint-plugin
- * @typescript-eslint/parser // ESLint的解析器，用于解析typescript，从而检查和规范Typescript代码
- *
- * "off" 或 0 - 关闭规则
- * "warn" 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出)
- * "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
- */
-
 module.exports = {
   root: true,
   env: {
     browser: true,
     node: true,
+    es6: true,
   },
-  globals: {},
-  /* 指定如何解析语法。可以为空，但若不为空，只能配该值，原因见下文。*/
-  parser: 'vue-eslint-parser',
-  /* 优先级低于parse的语法解析配置 */
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    parser: '@typescript-eslint/parser', // Specifies the ESLint parser
-    ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module', // Allows for the use of imports
-    ecmaFeatures: {
-      // tsx: true, // Allows for the parsing of JSX
-      jsx: true,
-    },
+    parser: 'babel-eslint',
   },
   extends: [
-    'eslint:recommended',
     'plugin:vue/vue3-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
     'prettier',
   ],
-  plugins: ['vue'],
+  plugins: ['markdown', '@typescript-eslint', 'import'],
+  overrides: [
+    {
+      files: ['*.md'],
+      processor: 'markdown/markdown',
+      rules: {
+        'no-console': 'off',
+      },
+    },
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: ['@vue/typescript/recommended', '@vue/prettier'],
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+      rules: {
+        '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/ban-types': 0,
+        '@typescript-eslint/consistent-type-imports': 'error',
+        '@typescript-eslint/explicit-module-boundary-types': 0,
+        '@typescript-eslint/no-empty-function': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          { vars: 'all', args: 'after-used', ignoreRestSiblings: true },
+        ],
+        '@typescript-eslint/ban-ts-comment': 0,
+      },
+    },
+  ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 2 : 1,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 1,
-    'vue/one-component-per-file': 0,
-    'prettier/prettier': [
-      'error',
+    'import/no-named-as-default': 'off',
+    'import/namespace': [2, { allowComputed: true }],
+    'import/no-named-as-default-member': 'off',
+    'import/no-unresolved': [2, { ignore: ['@'] }],
+    'comma-dangle': [2, 'always-multiline'],
+    'no-var': 'error',
+    'no-console': [process.env.NODE_ENV === 'production' ? 2 : 0, { allow: ['warn', 'error'] }],
+    'object-shorthand': 2,
+    'no-unused-vars': [2, { ignoreRestSiblings: true, argsIgnorePattern: '^_' }],
+    'no-undef': 2,
+    camelcase: 'off',
+    'no-extra-boolean-cast': 'off',
+    semi: ['error', 'always'],
+    'vue/no-v-html': 'off',
+    'vue/require-explicit-emits': 'off',
+    'vue/require-prop-types': 'off',
+    'vue/require-default-prop': 'off',
+    'vue/no-reserved-keys': 'off',
+    'vue/comment-directive': 'off',
+    'vue/prop-name-casing': 'off',
+    'vue/one-component-per-file': 'off',
+    'vue/custom-event-name-casing': 'off',
+    'vue/v-on-event-hyphenation': 'off',
+    'vue/max-attributes-per-line': [
+      2,
       {
-        trailingComma: 'all',
+        singleline: 20,
+        multiline: 1,
       },
     ],
+    'vue/multi-word-component-names': 'off',
   },
 };
